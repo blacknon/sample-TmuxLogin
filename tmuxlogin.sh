@@ -25,9 +25,12 @@ function tmux_select() {
 function tmux_start(){
     title="tmux session name"
     msg="Please input yout tmux session name"
-    session_name=$(whiptail --inputbox "$msg" 15 80 "abcdefg" --title "$title" 3>&1 1>&2 2>&3)
-    [ ! $session_name = "" ] && tmux new -s $session_name $@
+    default="$(date +%Y%m%d_%H%M%S)_session"
+    session_name=$(whiptail --inputbox "$msg" 15 80 "$default" --title "$title" 3>&1 1>&2 2>&3)
+    [ ! $session_name = "" ] && tmux new -s $session_name $cmd
 }
+
+cmd=$@
 
 # get tmux session list
 s_strlist=$(tmux ls -F "#{session_id} #{session_name}_#{?session_attached,(attached),}")
