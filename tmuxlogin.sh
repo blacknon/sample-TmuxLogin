@@ -26,7 +26,7 @@ function tmux_start(){
     title="tmux session name"
     msg="Please input yout tmux session name"
     session_name=$(whiptail --inputbox "$msg" 15 80 "abcdefg" --title "$title" 3>&1 1>&2 2>&3)
-    [ ! $session_name = "" ] && tmux new -s $session_name $1
+    [ ! $session_name = "" ] && tmux new -s $session_name $@
 }
 
 # get tmux session list
